@@ -3,21 +3,17 @@ using System.Collections;
 
 public class InitHead : MyScripts
 {
-
-    private LayerMask layerMask = 1 << 8;
+    private LayerMask layerMask = 1 << 1;
 
     private GameObject menuObject;
 
     private bool flag = true;
 
-    private Transform cursor;
-
-    private UISprite sprite;
-
     private RaycastHit headRatcastHit;
 
     protected override void CreateDo()
     {
+
     }
 
     public void turn(bool flag)
@@ -29,33 +25,14 @@ public class InitHead : MyScripts
     {
         if (flag)
         {
-            if (Physics.Raycast(MyController.getHeadRay(), out headRatcastHit, 3f))
+            if (Physics.Raycast(MyController.getHeadRay(), out headRatcastHit, 3f, layerMask))
             {
                 if (headRatcastHit.transform != null)
                 {
-                    //headRatcastHit.transform.gameObject.AddComponent<>();
-
-                    cursor = headRatcastHit.transform.GetChild(1);
-                    sprite = cursor.GetChild(0).GetComponent<UISprite>();
-                    setMenuObjectHover(sprite);
+                    MyController.CreatePrefabInTransform(transform.root.parent, MyEnum.ScaneObjectType.test, headRatcastHit.point);
+                    //setMenuObjectHover(sprite);
                 }
             }
-        }
-    }
- 
-    public void setMenuObjectHover(UISprite sprite)
-    {
-        sprite.fillAmount += Time.deltaTime;
- 
-        if (sprite.fillAmount >= 1f)
-        {
-            sprite.fillAmount = 0f;
-            MyController.CreatePrefabInTransform(headRatcastHit.transform, MyEnum.ScaneObjectType.FunctionMenu, transform.position - transform.forward.normalized);
-            flag = false;
-        }
-        else
-        {
-            sprite.fillAmount = 0f;
         }
     }
 
