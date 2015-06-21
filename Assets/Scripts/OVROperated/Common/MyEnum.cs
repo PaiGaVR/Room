@@ -27,7 +27,7 @@ public static class MyEnum {
     /// </summary>
     public enum ScaneObjectType
     {
-       XiangQingMenu, icon, TiHuanMenu, FunctionMenu, test, LoadMenu
+       XiangQingMenu, icon, TiHuanMenu, FunctionMenu, test, LoadMenu, fpsMenu
     }
 
     /// <summary>
